@@ -1,0 +1,14 @@
+**/__pycache__/
+results/
+venv/
+data/
+notes/
+tex/
+proposal/
+old*.py
+.ipynb_checkpoints
+.DS_Store
+__MACOSX
+references/
+TODO.txt
+**/.CondaPkg
