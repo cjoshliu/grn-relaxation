@@ -4,7 +4,7 @@
 import jax
 from jax import numpy as jnp
 
-from modelIO import *
+from utils.modelIO import *
 
 
 def get_qAE(grn_states: jnp.ndarray, N: int, Ttr: int) -> float:
@@ -63,3 +63,37 @@ def get_qab(grn_state_a: int, grn_state_b: int, N: int) -> float:
     grn_code_b = encode_grn_state(grn_state_b, N)
     equal_spins = (grn_code_a == grn_code_b).sum()
     return 2.0*equal_spins/N-1.0
+
+
+def get_all_qab(replicas: jnp.ndarray, N: int) -> jnp.ndarray:
+    '''Compute overlaps between all unordered pairs of replicas.
+
+    Parameters
+    ----------
+    grn_states : jnp.ndarray, 1D, int
+        Nonnegative integer representations of GRN states
+
+    N : int
+        Number of genes
+
+    Returns
+    -------
+    qab_values : jnp.ndarray, 1D, float
+        Overlaps between all unordered pairs of replicas, excluding self-overlaps
+    '''
+    num_replicas = replicas.shape[0]
+
+    # Get indices of all unordered pairs (i, j) where i < j
+    idx_i, idx_j = jnp.triu_indices(num_replicas, k=1)
+
+    # Extract the GRN states for these indices
+    grn_state_a = replicas[idx_i]
+    grn_state_b = replicas[idx_j]
+
+    # Vectorize get_qab over grn_state_a and grn_state_b
+    vectorized_get_qab = jax.vmap(get_qab, in_axes=(0, 0, None))
+
+    # Compute the overlaps
+    qab_values = vectorized_get_qab(grn_state_a, grn_state_b, N)
+
+    return qab_values

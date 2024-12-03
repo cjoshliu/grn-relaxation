@@ -4,9 +4,9 @@
 import jax
 from jax import numpy as jnp
 
-from energies import *
-from mcmc import *
-from modelIO import *
+from utils.energies import *
+from utils.mcmc import *
+from utils.modelIO import *
 
 
 def is_stable_state(grn: jnp.ndarray,

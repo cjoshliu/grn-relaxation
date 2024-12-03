@@ -5,9 +5,9 @@ from jax import numpy as jnp
 from jax import lax
 from jax import random
 
-from criteria import *
-from energies import *
-from modelIO import *
+from utils.criteria import *
+from utils.energies import *
+from utils.modelIO import *
 
 
 def get_proposal(grn: jnp.ndarray,
@@ -165,7 +165,6 @@ def get_trajectory(key: random.PRNGKey,
     -------
     grn_states : jnp.ndarray, 1D, int
         Nonnegative integer GRN states over N_steps
-        Note that the zeroth (initial) state is not included
 
     grn_velocities : jnp.ndarray, 1D, int
         Number of accepted flips over N_steps

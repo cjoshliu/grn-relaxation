@@ -4,7 +4,7 @@
 import jax
 from jax import numpy as jnp
 
-from modelIO import *
+from utils.modelIO import *
 
 
 def get_pct_frustration(grn: jnp.ndarray, grn_state: int, N: int) -> float:

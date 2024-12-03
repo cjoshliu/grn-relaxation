@@ -24,9 +24,8 @@ def load_grn(grn_path: str, gids_path: str):
         Row 1 contains IDs of target genes
         Row 2 contains interactions, 0 for inhibition, 1 for activation
 
-    gids : pd.DataFrame
-        Column 0 contains gene names
-        Column 1 contains gene IDs
+    gids : dict
+        Keys are gene names, values are gene indices
 
     N : int
         Nonnegative integer number of genes
