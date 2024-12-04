@@ -4,6 +4,7 @@ venv/
 notes/
 tex/
 proposal/
+old/
 old*.py
 .ipynb_checkpoints
 .DS_Store

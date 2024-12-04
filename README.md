@@ -12,9 +12,9 @@ I need the following figures:
 0. Histograms of time-averaged states at zero T and field of c-Kit, GATA1, and PU.1 for biological network
 1. Histograms of frustrations of final states at zero T and field for biological and random networks
 2. Mean frustration vs. temperature at zero field for biological network
-3. Correlation times vs. temperature at zero field for biological network
-4. Mean $q_{EA}$ by temperature at zero field for biological and random networks
-5. Mean $q_{ab}$ by temperature at zero field for biological and random networks
+3. Correlation times vs. temperature at zero field for biological and random networks
+4. Susceptibility by temperature for biological network
+5. Mean $q_{ab}$ by temperature at zero field for biological network
 6. Topological speed limit at zero T for biological and random networks
 7. Free energy vs. temperature for biological network (Appendix)
 8. Table of gene interactions (Appendix)
