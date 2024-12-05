@@ -5,7 +5,7 @@ import jax
 from jax import numpy as jnp
 import numpy as np
 from scipy.optimize import curve_fit
-from scipy.stats import linregress
+from scipy.stats import sem
 
 from utils.modelIO import *
 
@@ -73,9 +73,6 @@ def get_all_qab(replicas: jnp.ndarray, N: int) -> jnp.ndarray:
     qab_values = vectorized_get_qab(grn_state_a, grn_state_b, N)
 
     return qab_values
-
-
-### HELPERS ###
 
 
 def get_qab(grn_state_a: int, grn_state_b: int, N: int) -> float:
@@ -148,6 +145,50 @@ def get_avg_autocorrelation(xs: jnp.ndarray, N: int) -> jnp.ndarray:
         return get_autocorrelation(x, N)
     get_autocorrelation_optimized = jax.vmap(get_autocorrelation_instance)
     return jnp.mean(get_autocorrelation_optimized(xs), axis=0)
+
+
+# def get_magnetization(grn_state: int, N: int) -> float:
+#     '''Estimate magnetization for a single GRN state.
+    
+#     Parameters
+#     ----------
+#     grn_state : int
+#         Nonnegative integer GRN state
+
+#     N : int
+#         Nonnegative integer number of genes
+
+#     Returns
+#     -------
+#     m : float
+#         Average per-gene magnetization
+#     '''
+#     grn_state_code = encode_grn_state(grn_state, N)
+#     return 2.0*grn_state_code.sum()/N-1.0
+
+
+# def get_avg_magnetization(grn_states: int, N: int):
+#     '''Estimate average magnetization for multiple GRN states.
+    
+#     Parameters
+#     ----------
+#     grn_states : jnp.ndarray, 1D, int
+#         Nonnegative integer representations of GRN states
+
+#     N : int
+#         Number of genes
+
+#     Returns
+#     -------
+#     m_mu : float
+#         Mean per-gene magnetization
+
+#     m_se : float
+#         Standard error of mean per-gene magnetization
+#     '''
+#     get_m_vmap = jax.vmap(lambda grn_state: get_magnetization(grn_state, N))
+#     ms = get_m_vmap(grn_states)
+#     return jnp.mean(ms), jnp.array(sem(ms))
 
 
 # def get_dynamic_exp(xs: jnp.ndarray, N: int):
